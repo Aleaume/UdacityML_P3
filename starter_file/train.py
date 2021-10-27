@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
 from azureml.core.run import Run
-from azureml.core import Dataset, Workspace
+from azureml.core import Dataset
 
 
 #Requirements: azureml-sdk (pip install azureml-sdk)
@@ -46,15 +46,13 @@ def main():
     joblib.dump(model,'./outputs/model.joblib')
 
 #  Create TabularDataset 
-#Retrieve current workspace
-ws = Workspace.from_config()
 
-datastore = ws.get_default_datastore() 
-dataset = Dataset.Tabular.from_delimited_files(path=(datastore, 'data/dataset_Tuscany_Wine_prepared.csv'),
-       header='ONLY_FIRST_FILE_HAS_HEADERS')
+url_data="https://docs.google.com/spreadsheets/d/1X9M3eNuBDv0ZKsOdidkdaBx9W1NubNDz3kxXuULsXmo/export?format=csv"
+
+dataset = Dataset.Tabular.from_delimited_files(path=url_data)
 
 
-x, y = clean_data(datastore)
+x, y = clean_data(dataset)
 
 # TODO: Split data into train and test sets.
 

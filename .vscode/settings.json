@@ -1,1 +1,4 @@
-{}
+{
+    "azureML.defaultWorkspaceId": "/subscriptions/d7f39349-a66b-446e-aba6-0053c2cf1c11/resourceGroups/aml-quickstarts-162212/providers/Microsoft.MachineLearningServices/workspaces/quick-starts-ws-162212",
+    "jupyter.jupyterServerType": "remote"
+}
