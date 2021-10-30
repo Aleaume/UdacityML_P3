@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.metrics import mean_squared_error
 import joblib
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 import pandas as pd
 from azureml.core.run import Run
 from azureml.core import Dataset
@@ -17,7 +17,29 @@ def clean_data(data):
     
     # Split x train, y test were "points" is dropped
     x_df = data.to_pandas_dataframe().dropna()
+    x_df.drop("vintage") # no relevance for prediction was just needed to match weather with history
+    x_df['points']- 83 #rearrange rankings
+
+
+    ### NEED TO use OneHotEncoder  (one-of-K) algo to trnasform String to integer
+    #x_df["variety"].describe()
+
+    varieties = x_df.variety.unique()
+
+    #'Sangiovese', 'Cabernet Franc', 'Red Blend', 'Sangiovese Grosso','Chardonnay', 'Vernaccia', 'Syrah', 'White Blend', 'Vermentino','Pinot Bianco', 'Viognier', 'Merlot', 'Rosato','Cabernet Sauvignon', 'Petit Verdot', 'Pinot Nero', 'Tempranillo','Aleatico', 'Rosé'
+
+    values_varieties= np.array(varieties)
+    label_encoder =LabelEncoder()
+    int_encoded = label_encoder.fit_transform(values_varieties)
+    x_df['variety'] = int_encoded
+
+
+#SOURCE : https://machinelearningmastery.com/how-to-one-hot-encode-sequence-data-in-python/
+
+
     y_df = x_df.pop("points")
+
+
     return x_df, y_df
 
 def main():
