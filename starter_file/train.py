@@ -2,7 +2,7 @@ from sklearn.linear_model import LogisticRegression
 import argparse
 import os
 import numpy as np
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, roc_curve, auc, roc_auc_score, accuracy_score
 import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder
@@ -17,22 +17,29 @@ def clean_data(data):
     
     # Split x train, y test were "points" is dropped
     x_df = data.to_pandas_dataframe().dropna()
-    x_df.drop("vintage") # no relevance for prediction was just needed to match weather with history
+    x_df.drop("vintage",axis=1) # no relevance for prediction was just needed to match weather with history
     x_df['points']- 83 #rearrange rankings
 
 
     ### NEED TO use OneHotEncoder  (one-of-K) algo to trnasform String to integer
     #x_df["variety"].describe()
 
-    varieties = x_df.variety.unique()
-
+    unique_varieties = x_df.variety.unique()
+    varieties = x_df['variety']
     #'Sangiovese', 'Cabernet Franc', 'Red Blend', 'Sangiovese Grosso','Chardonnay', 'Vernaccia', 'Syrah', 'White Blend', 'Vermentino','Pinot Bianco', 'Viognier', 'Merlot', 'Rosato','Cabernet Sauvignon', 'Petit Verdot', 'Pinot Nero', 'Tempranillo','Aleatico', 'Rosé'
 
     values_varieties= np.array(varieties)
     label_encoder =LabelEncoder()
     int_encoded = label_encoder.fit_transform(values_varieties)
     x_df['variety'] = int_encoded
+    
 
+    wineries = x_df['winery']
+
+    values_wineries= np.array(wineries)
+    label_encoder =LabelEncoder()
+    int_encoded = label_encoder.fit_transform(values_wineries)
+    x_df['winery'] = int_encoded
 
 #SOURCE : https://machinelearningmastery.com/how-to-one-hot-encode-sequence-data-in-python/
 
@@ -47,7 +54,7 @@ def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--C', type=float, default=1.0, help="Inverse of regularization strength. Smaller values cause stronger regularization")
-    parser.add_argument('--max_iter', type=int, default=10, help="Maximum number of iterations to converge")
+    parser.add_argument('--max_iter', type=int, default=10000, help="Maximum number of iterations to converge")
 
     args = parser.parse_args()
     #More argument could be passed
@@ -57,12 +64,15 @@ def main():
     run.log("Max iterations:", np.int(args.max_iter))
 
     #classification task
-    model = LogisticRegression(C=args.C, max_iter=args.max_iter).fit(x_train, y_train)
+    model = LogisticRegression(C=args.C, max_iter=args.max_iter,class_weight='balanced').fit(x_train, y_train)
 
-    
 
     accuracy = model.score(x_test, y_test)
     run.log("Accuracy", np.float(accuracy))
+
+    #accuracy_score = model.score(y_test,y_train)
+    #run.log("Accuracy Score", np.float(accuracy_score))
+
 
     os.makedirs('outputs',exist_ok=True)
     joblib.dump(model,'./outputs/model.joblib')
