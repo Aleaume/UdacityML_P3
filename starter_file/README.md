@@ -25,6 +25,33 @@ More info here: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-s
 
 ### Overview
 *TODO*: Explain about the data you are using and where you got it from.
+The Dataset is composed of 2 combined dataset:
+- A Dataset made of a wine list with their review score found in filtered on county="Tuscany"
+Available on data.world here: https://data.world/markpowell/global-wine-points/workspace/query?filename=Wines.xlsx&newQueryType=SQL&selectedTable=wines&tempId=1634310537112
+
+- An Extract of weather data for the Tuscan regions found here 
+Available here: https://www.historique-meteo.net/amerique-du-nord/californie/
+
+
+#### Once retrieved those 2 Dataset are merged into one in order to have the the final dataset used:
+-vintage : Year of harvest of the wine (int)
+-points : score given to the wine out of 100 (int)
+-variety : grape variety of the wine (str)
+-winery: winery name of the wine (str)
+-avg winter temp: average winter temperature for the vintage year (eg. vintage 2010, winter: Dec2009,Jan2010,Feb2010) (float)
+-avg spring temp: average spring temperature for the vintage year (float)
+-avg summer temp: average summer temperature for the vintage year (float)
+-avg fall temp: average fall temperature for the vintage year (float)
+-avg winter sun hour: average winter sun hours for the vintage year (float)
+-avg spring sun hour: average spring sun hours for the vintage year (float)
+-avg summer sun hour: average summer sun hours for the vintage year (float)
+-avg fall sun hour: average fall sun hours for the vintage year (float)
+-avg daily precip winter: average daily winter precipitation in mm for the vintage year (float)
+-avg daily precip spring: average daily spring precipitation in mm for the vintage year (float)
+-avg daily precip summer: average daily summer precipitation in mm for the vintage year (float)
+-avg daily precip fall: average daily fall precipitation in mm for the vintage year (float)
+
+This Dataset can then be accessed here: https://docs.google.com/spreadsheets/d/1X9M3eNuBDv0ZKsOdidkdaBx9W1NubNDz3kxXuULsXmo/edit#gid=0 
 
 ### Task
 *TODO*: Explain the task you are going to be solving with this dataset and the features you will be using for it.
