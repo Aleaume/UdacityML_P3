@@ -415,4 +415,18 @@ print(resp.text)
 - Demo of a sample request sent to the endpoint and its response
 
 ## Standout Suggestions
-*TODO (Optional):* This is where you can provide information about any standout suggestions that you have attempted.
+
+-Convert Model to ONNX format and export
+
+-Fine tune json requests when testing deployments
+
+-Automate upload of entry scripts + train script via az copy or else
+
+-Retrieve userfolder in Azure instance directly from the notebook
+
+
+### On the Model itself:
+
+A lot improvement has to be done on that model to be successful. Accuracy is poor.
+For instead I believe a better & larger volume of data would help.
+
