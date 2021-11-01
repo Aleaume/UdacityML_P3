@@ -211,6 +211,10 @@ Once done we pass 2 arguments to log on the prediction model Logistic Regression
 - Regularization strength
 - Maximum itarations number
 
+
+![image](https://user-images.githubusercontent.com/32632731/139721182-d94219a8-53fc-4e20-a3f1-81c2769ca49a.png)
+
+
 #### In the Hyperdrive settings
 
 We then simply specify an Early termination policy:
