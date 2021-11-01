@@ -35,11 +35,17 @@ Available here: https://www.historique-meteo.net/amerique-du-nord/californie/
 
 #### Once retrieved those 2 Dataset are merged into one in order to have the the final dataset used:
 -vintage : Year of harvest of the wine (int)
+
 -points : score given to the wine out of 100 (int)
+
 -variety : grape variety of the wine (str)
+
 -winery: winery name of the wine (str)
+
 -avg winter temp: average winter temperature for the vintage year (eg. vintage 2010, winter: Dec2009,Jan2010,Feb2010) (float)
+
 -avg spring temp: average spring temperature for the vintage year (float)
+
 -avg summer temp: average summer temperature for the vintage year (float)
 -avg fall temp: average fall temperature for the vintage year (float)
 -avg winter sun hour: average winter sun hours for the vintage year (float)
