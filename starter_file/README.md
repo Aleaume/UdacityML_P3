@@ -47,15 +47,25 @@ Available here: https://www.historique-meteo.net/amerique-du-nord/californie/
 -avg spring temp: average spring temperature for the vintage year (float)
 
 -avg summer temp: average summer temperature for the vintage year (float)
+
 -avg fall temp: average fall temperature for the vintage year (float)
+
 -avg winter sun hour: average winter sun hours for the vintage year (float)
+
 -avg spring sun hour: average spring sun hours for the vintage year (float)
+
 -avg summer sun hour: average summer sun hours for the vintage year (float)
+
 -avg fall sun hour: average fall sun hours for the vintage year (float)
+
 -avg daily precip winter: average daily winter precipitation in mm for the vintage year (float)
+
 -avg daily precip spring: average daily spring precipitation in mm for the vintage year (float)
+
 -avg daily precip summer: average daily summer precipitation in mm for the vintage year (float)
+
 -avg daily precip fall: average daily fall precipitation in mm for the vintage year (float)
+
 
 This Dataset can then be accessed here: https://docs.google.com/spreadsheets/d/1X9M3eNuBDv0ZKsOdidkdaBx9W1NubNDz3kxXuULsXmo/edit#gid=0 
 
