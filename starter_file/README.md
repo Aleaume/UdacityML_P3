@@ -71,6 +71,7 @@ This Dataset can then be accessed here: https://docs.google.com/spreadsheets/d/1
 
 ### Task
 *TODO*: Explain the task you are going to be solving with this dataset and the features you will be using for it.
+
 The main objective of is to be able to predict the review score of a wine based on either the winery, variety or all weather factors available.
 
 
@@ -141,11 +142,9 @@ Also we can look at the details of the results via the Azure ML Studio:
 
 
 Finally, There is definitely an imbalanced data issue with the dataset as there only 2 values with 83 points and 2 with 97.
-+---------------------------------+---------------------------------+--------------------------------------+
-|Size of the smallest class       |Name/Label of the smallest class |Number of samples in the training data|
-+=================================+=================================+======================================+
-|2                                |83, 97                           |646                                   |
-+---------------------------------+---------------------------------+--------------------------------------+
+
+![image](https://user-images.githubusercontent.com/32632731/139694728-8c65852e-2640-49d2-bfec-a88ff77b8de3.png)
+
 
 *TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
 
@@ -251,10 +250,163 @@ hyperdrive_run_config = HyperDriveConfig(hyperparameter_sampling=param_sampling,
 ### Results
 *TODO*: What are the results you got with your model? What were the parameters of the model? How could you have improved it?
 
+Using the RunDetails widget we can the results of the run:
+
+We can conclude that ... influence ....
+
+One possible way to improve the model would be expand the greatly the data volume and not being limited to the few years of analysis.
+
 *TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
 
 ## Model Deployment
 *TODO*: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
+
+After the best model is registered & saved we proceed to deploy it.
+
+#### First as a local service (for testing)
+
+```python
+
+#To create a local deployment configuration
+deployment_config = LocalWebservice.deploy_configuration(port=9064)
+
+#Create Environment
+
+env = Environment(name="AzureML-AutoML")
+#myenv=env.clone("myenv")
+#myenv.python.conda_dependencies.add_pip_package("joblib==1.1.0")
+
+#Uploaded manually entry scripts in the below defined "entry_script" path.
+
+my_inference_config = InferenceConfig(
+    environment=env,
+    source_directory= './',
+    entry_script="./Users/odl_user_162459/score.py"
+    #entry_script="./score.py"
+)
+
+
+
+# Deploy the service locally
+
+service = model.deploy(ws, "local-service", [model], my_inference_config, deployment_config)
+service.reload()
+print(service.get_logs())
+
+print(service.scoring_uri)
+
+service.wait_for_deployment(show_output=True)
+
+```
+
+We can then call the service for testing
+
+```python
+
+#Call model to test 
+
+#service.update(enable_app_insights=True)
+
+
+uri = service.scoring_uri
+requests.get("http://localhost:9064")
+headers = {"Content-Type": "application/json"}
+data = {
+            "vintage": 2016,
+            "variety": "Sangiovese",
+            "winery": "Casa Raia",
+            "avg winter temp": 4.2,
+            "avg spring temp": 15,
+            "avg summer temp": 27,
+			"avg fall temp":16,
+			"avg winter sun hour":7,
+			"avg spring hour":12,
+			"avg summer sun hour":16,
+			"avg fall sun hour":9,
+			"avg daily precip winter":3,
+			"avg daily precip spring":3,
+			"avg daily precip summer":1,
+			"avg daily precip fall":2
+}
+data = json.dumps(data)
+response = requests.post(uri, data=data, headers=headers)
+print(response.json())
+
+```
+
+#### Finally as a WebService using ACI
+
+```python
+#Deploy to ACI
+
+deployment_config = AciWebservice.deploy_configuration(
+    cpu_cores=1, memory_gb=1, auth_enabled=True
+)
+
+service = model.deploy(
+    ws,
+    "mywebservice",
+    [model],
+    my_inference_config,
+    deployment_config,
+    overwrite=True,
+)
+service.wait_for_deployment(show_output=True)
+
+print(service.get_logs())
+
+
+```
+
+Once service is checked and in a Healthy status we test if by sending a request:
+
+```
+
+import requests
+import json
+
+primary, secondary = service.get_keys()
+
+# URL for the web service
+scoring_uri = service.scoring_uri
+# If the service is authenticated, set the key or token
+key = primary
+
+# Two sets of data to score, so we get two results back
+data = {
+			"vintage": 2011,
+			"variety": "Sangiovese",
+			"winery": "Casa Raia",
+			"avg winter temp": 4.2,
+			"avg spring temp": 15,
+			"avg summer temp": 27,
+			"avg fall temp":16,
+			"avg winter sun hour":7,
+			"avg spring hour":12,
+			"avg summer sun hour":16,
+			"avg fall sun hour":9,
+			"avg daily precip winter":3,
+			"avg daily precip spring":3,
+			"avg daily precip summer":1,
+			"avg daily precip fall":2
+	
+}
+# Convert to JSON string
+input_data = json.dumps(data)
+
+# Set the content type
+headers = {'Content-Type': 'application/json'}
+# If authentication is enabled, set the authorization header
+headers['Authorization'] = f'Bearer {key}'
+
+# Make the request and display the response
+resp = requests.post(scoring_uri, input_data, headers=headers)
+print(resp.text)
+
+
+```
+
+
 
 ## Screen Recording
 *TODO* Provide a link to a screen recording of the project in action. Remember that the screencast should demonstrate:
