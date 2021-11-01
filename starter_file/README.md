@@ -24,7 +24,7 @@ More info here: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-s
 ## Dataset
 
 ### Overview
-*TODO*: Explain about the data you are using and where you got it from.
+
 The Dataset is composed of 2 combined dataset:
 - A Dataset made of a wine list with their review score found in filtered on county="Tuscany"
 Available on data.world here: https://data.world/markpowell/global-wine-points/workspace/query?filename=Wines.xlsx&newQueryType=SQL&selectedTable=wines&tempId=1634310537112
@@ -70,7 +70,7 @@ Available here: https://www.historique-meteo.net/amerique-du-nord/californie/
 This Dataset can then be accessed here: https://docs.google.com/spreadsheets/d/1X9M3eNuBDv0ZKsOdidkdaBx9W1NubNDz3kxXuULsXmo/edit#gid=0 
 
 ### Task
-*TODO*: Explain the task you are going to be solving with this dataset and the features you will be using for it.
+
 
 The main objective of is to be able to predict the review score of a wine based on either the winery, variety or all weather factors available.
 
@@ -130,7 +130,6 @@ automl_config = AutoMLConfig(
 
 
 ### Results
-*TODO*: What are the results you got with your automated ML model? What were the parameters of the model? How could you have improved it?
 
 Once Ran we can see the details with:
 
@@ -159,10 +158,8 @@ Finally, There is definitely an imbalanced data issue with the dataset as there 
 ![image](https://user-images.githubusercontent.com/32632731/139694728-8c65852e-2640-49d2-bfec-a88ff77b8de3.png)
 
 
-*TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
 
 ## Hyperparameter Tuning
-*TODO*: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
 
 For the part using Hyperparameter tuning, the setup is different. We use a train.py that contains the experiment logic and then pass it to the Hyperdrive to improve and fine tune parameters.
 
@@ -261,7 +258,6 @@ hyperdrive_run_config = HyperDriveConfig(hyperparameter_sampling=param_sampling,
 ```
 
 ### Results
-*TODO*: What are the results you got with your model? What were the parameters of the model? How could you have improved it?
 
 Using the RunDetails widget we can the results of the run:
 
@@ -280,7 +276,7 @@ One possible way to improve the model would be expand the greatly the data volum
 
 
 ## Model Deployment
-*TODO*: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
+
 
 After the best model is registered & saved we proceed to deploy it.
 
@@ -435,10 +431,8 @@ print(resp.text)
 
 
 ## Screen Recording
-*TODO* Provide a link to a screen recording of the project in action. Remember that the screencast should demonstrate:
-- A working model
-- Demo of the deployed  model
-- Demo of a sample request sent to the endpoint and its response
+
+A Screenast can be found here: 
 
 ## Standout Suggestions
 
