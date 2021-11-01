@@ -126,6 +126,9 @@ automl_config = AutoMLConfig(
 
 ```
 
+![image](https://user-images.githubusercontent.com/32632731/139710169-4c9952fe-6da4-452f-8ca4-6ec284dacb7b.png)
+
+
 ### Results
 *TODO*: What are the results you got with your automated ML model? What were the parameters of the model? How could you have improved it?
 
@@ -135,9 +138,19 @@ Once Ran we can see the details with:
 RunDetails(runAutoML).show()
 ```
 
-The best model gives us a accuracy of XX%.
+![image](https://user-images.githubusercontent.com/32632731/139710314-2db77038-40da-4cd7-9e8c-cab03422490d.png)
+
+
+The best model gives us a accuracy of 24.6%.
 
 Also we can look at the details of the results via the Azure ML Studio:
+
+![image](https://user-images.githubusercontent.com/32632731/139710471-9aabf06e-0460-4c05-92c8-eea4c4fd23f2.png)
+
+
+![image](https://user-images.githubusercontent.com/32632731/139710390-db38eabe-45ef-4297-b257-108415e93a17.png)
+
+![image](https://user-images.githubusercontent.com/32632731/139711131-9375a003-2be2-43c6-889c-761dd4c5422c.png)
 
 
 
