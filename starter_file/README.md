@@ -371,6 +371,11 @@ print(service.get_logs())
 
 ```
 
+![image](https://user-images.githubusercontent.com/32632731/139713523-d7adcc89-722e-4fdf-91f8-5a030b4ec1bf.png)
+
+![image](https://user-images.githubusercontent.com/32632731/139713726-fe6c40eb-9d0e-4e8b-8156-6b29566644ff.png)
+
+
 Once service is checked and in a Healthy status we test if by sending a request:
 
 ```
