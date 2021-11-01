@@ -428,5 +428,7 @@ print(resp.text)
 ### On the Model itself:
 
 A lot improvement has to be done on that model to be successful. Accuracy is poor.
-For instead I believe a better & larger volume of data would help.
+For instead I believe a better & larger volume of data would help. For the purpose of this course I could have definitely taken an "easier" dataset and achieve better results, such as the typical "heart attack" datasets.
+
+Also, on the Hyperdrive part I think I could have tested maybe more parameters.
 
