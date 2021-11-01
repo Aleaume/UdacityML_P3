@@ -265,11 +265,19 @@ hyperdrive_run_config = HyperDriveConfig(hyperparameter_sampling=param_sampling,
 
 Using the RunDetails widget we can the results of the run:
 
-We can conclude that ... influence ....
+![image](https://user-images.githubusercontent.com/32632731/139716905-0c9d2eaf-608a-4e23-a467-c19cf44ea6af.png)
+
+![image](https://user-images.githubusercontent.com/32632731/139716957-67ce1c1c-85bf-4b4e-8ad4-5d8a13759830.png)
+
+![image](https://user-images.githubusercontent.com/32632731/139717045-1a298f13-d3e9-4812-9781-4183791367c3.png)
+
+We can conclude that both the Regularization strenght and the maximum number of iteration of little to no   influence in improving the primary metric (Accuracy).
+
+![image](https://user-images.githubusercontent.com/32632731/139717115-5f85f788-38bc-4c1c-b660-f5e848a4054e.png)
+
 
 One possible way to improve the model would be expand the greatly the data volume and not being limited to the few years of analysis.
 
-*TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
 
 ## Model Deployment
 *TODO*: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
@@ -436,7 +444,7 @@ print(resp.text)
 
 -Convert Model to ONNX format and export
 
--Fine tune json requests when testing deployments
+-Fine tune json requests when testing deployments (at the moment unsucessful) 
 
 -Automate upload of entry scripts + train script via az copy or else
 
