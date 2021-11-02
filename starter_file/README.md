@@ -165,6 +165,33 @@ Finally, There is definitely an imbalanced data issue with the dataset as there 
 ![image](https://user-images.githubusercontent.com/32632731/139694728-8c65852e-2640-49d2-bfec-a88ff77b8de3.png)
 >Output showing the balancing issue in detail
 
+#### Best AutoML run
+
+Once done we retrieve the best run:
+
+´´´python
+
+best_run, fitted_model = runAutoML.get_output()
+
+runAutoML.wait_for_completion()
+print(best_run)
+
+RunDetails(best_run).show()
+
+´´´
+
+![image](https://user-images.githubusercontent.com/32632731/139948839-3fb25654-82ab-4463-9222-4977d9e12bcf.png)
+>Screenshot of the best AutoML run with id and experiment name followed by a Precision-Recall chart
+
+![image](https://user-images.githubusercontent.com/32632731/139948962-fdbd6c39-9b12-4aec-b0f8-42b18a025771.png)
+>ROC curve of the best AutoML run
+
+![image](https://user-images.githubusercontent.com/32632731/139949057-179fafd0-b291-4787-ba53-e57dce2e8306.png)
+>Confusion Matrix of the Best AutoML Run
+
+![image](https://user-images.githubusercontent.com/32632731/139949176-62ea4ba4-7189-40cd-ab19-57eb429bc6fb.png)
+>Top 10 Feature importance of the Best AutoML Run
+
 
 ## Hyperparameter Tuning
 
