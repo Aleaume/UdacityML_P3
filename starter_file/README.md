@@ -357,6 +357,8 @@ We reached a accuracy of ~25% using a VotingEnsemble algorithm. We can see here 
 For the Hyperdrive model, things look a bit more complicated. We did achieve a best accuracy of about ~14% using a LogisticRegression algorithm.
 Here is a little diagram detailing the steps of the model:
 
+![image](https://user-images.githubusercontent.com/32632731/139954606-0997a50d-e331-4084-85fa-afd728f40c5b.png)
+>Diagram of the main steps of the Hyperdrive Experiment
 
 Following those conclusions, I decided to go ahead and deploy the model with the best accuracy, the AutoML one.
 
