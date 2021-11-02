@@ -169,7 +169,7 @@ Finally, There is definitely an imbalanced data issue with the dataset as there 
 
 Once done we retrieve the best run:
 
-´´´python
+```python
 
 best_run, fitted_model = runAutoML.get_output()
 
@@ -178,7 +178,7 @@ print(best_run)
 
 RunDetails(best_run).show()
 
-´´´
+```
 
 ![image](https://user-images.githubusercontent.com/32632731/139948839-3fb25654-82ab-4463-9222-4977d9e12bcf.png)
 >Screenshot of the best AutoML run with id and experiment name followed by a Precision-Recall chart
