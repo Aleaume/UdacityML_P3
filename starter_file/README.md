@@ -149,6 +149,8 @@ Also we can look at the details of the results via the Azure ML Studio:
 
 ![image](https://user-images.githubusercontent.com/32632731/139710390-db38eabe-45ef-4297-b257-108415e93a17.png)
 >Screenshot of the Cummulative Gains Curve & the Confusion Matrix of the Best AutomL run
+
+
 ![image](https://user-images.githubusercontent.com/32632731/139711131-9375a003-2be2-43c6-889c-761dd4c5422c.png)
 >Screenshot of the Top 5 features of the Best AutomL run
 
