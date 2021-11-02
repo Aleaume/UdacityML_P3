@@ -8,7 +8,7 @@ This is splitted in 2 parts:
 After that we can compare the model performances, deploy the Best Model and Test its Endpoint.
 
 ![image](https://user-images.githubusercontent.com/32632731/139536624-13d4d29a-7de5-4da1-9b90-da15c20a2922.png)
-
+>Diagram of the setps of the Project
 
 ## Project Set Up and Installation
 
@@ -127,7 +127,7 @@ automl_config = AutoMLConfig(
 ```
 
 ![image](https://user-images.githubusercontent.com/32632731/139710169-4c9952fe-6da4-452f-8ca4-6ec284dacb7b.png)
-
+>Output of the AutoML experiment running
 
 ### Results
 
@@ -138,25 +138,25 @@ RunDetails(runAutoML).show()
 ```
 
 ![image](https://user-images.githubusercontent.com/32632731/139710314-2db77038-40da-4cd7-9e8c-cab03422490d.png)
-
+>Output of the RunDetails command on the AutoML experiment
 
 The best model gives us a accuracy of 24.6%.
 
 Also we can look at the details of the results via the Azure ML Studio:
 
 ![image](https://user-images.githubusercontent.com/32632731/139710471-9aabf06e-0460-4c05-92c8-eea4c4fd23f2.png)
-
+>Screenshot of the Top 6 Child runs of the AutoML Experiment
 
 ![image](https://user-images.githubusercontent.com/32632731/139710390-db38eabe-45ef-4297-b257-108415e93a17.png)
-
+>Screenshot of the Cummulative Gains Curve & the Confusion Matrix of the Best AutomL run
 ![image](https://user-images.githubusercontent.com/32632731/139711131-9375a003-2be2-43c6-889c-761dd4c5422c.png)
-
+>Screenshot of the Top 5 features of the Best AutomL run
 
 
 Finally, There is definitely an imbalanced data issue with the dataset as there only 2 values with 83 points and 2 with 97.
 
 ![image](https://user-images.githubusercontent.com/32632731/139694728-8c65852e-2640-49d2-bfec-a88ff77b8de3.png)
-
+>Output showing the balancing issue in detail
 
 
 ## Hyperparameter Tuning
@@ -213,7 +213,7 @@ Once done we pass 2 arguments to log on the prediction model Logistic Regression
 
 
 ![image](https://user-images.githubusercontent.com/32632731/139721182-d94219a8-53fc-4e20-a3f1-81c2769ca49a.png)
-
+>Output of the train.py script being ran
 
 #### In the Hyperdrive settings
 
@@ -237,6 +237,16 @@ param_sampling = RandomParameterSampling({
 #Bayesian sampling does not support early termination
 
 ```
+
+We can see in this piece of code that the hyperparamter search is focused on 2 parameters:
+
+- C, for Regularization Strenght. We are looking here at xxxxx
+The selecting method used here is uniform, meaning 
+This was thought to be relevant in oder to ...
+
+- Max_iter, for the maximum number of iteration. We are looking here at the number of iteration to be used in each run
+The selecting method used here
+This was used in order to test and assess
 
 Finally we create an estimator and define the remaining parameters in the HyperdriveConfig:
 
@@ -266,18 +276,36 @@ hyperdrive_run_config = HyperDriveConfig(hyperparameter_sampling=param_sampling,
 Using the RunDetails widget we can the results of the run:
 
 ![image](https://user-images.githubusercontent.com/32632731/139716905-0c9d2eaf-608a-4e23-a467-c19cf44ea6af.png)
+>Screenshot of the Hpyerdrive RunDetails with the top 6 runs based on accuracy
 
 ![image](https://user-images.githubusercontent.com/32632731/139716957-67ce1c1c-85bf-4b4e-8ad4-5d8a13759830.png)
+>Screenshot of the Hpyerdrive RunDetails with the distribution of accuracy among the runs on top, and at the bottom a chart plotting the 2 parameters against (-C & max_iter)
 
+Then we retrieve the best run of the experiment and display its details
 ![image](https://user-images.githubusercontent.com/32632731/139717045-1a298f13-d3e9-4812-9781-4183791367c3.png)
+>Screenshot of the Hpyerdrive RunDetails of the best run
 
 We can conclude that both the Regularization strenght and the maximum number of iteration of little to no   influence in improving the primary metric (Accuracy).
 
 ![image](https://user-images.githubusercontent.com/32632731/139717115-5f85f788-38bc-4c1c-b660-f5e848a4054e.png)
-
+>Screenshot of All the child runs and their metrics on the left, and on the right the dispersion of the 2 focused parameters and the Accuracy of the runs.
 
 One possible way to improve the model would be expand the greatly the data volume and not being limited to the few years of analysis.
 
+## Overview of the 2 Models
+
+Before we go ahead and deploy one Model let's review the main perks & fails of the 2 models:
+
+The AutoML best model performed overall better looking at the accuracy metric we were mainly looking for.
+We reached a accuracy of ~25% using a VotingEnsemble algorithm. We can see here in Detail the different step that the model goes through:
+
+
+
+For the Hyperdrive model, things look a bit more complicated. We did achieve a best accuracy of about ~14% using a LogisticRegression algorithm.
+Here is a little diagram detailing the steps of the model:
+
+
+Following those conclusions, I decided to go ahead and deploy the model with the best accuracy, the AutoML one.
 
 ## Model Deployment
 
@@ -380,13 +408,15 @@ print(service.get_logs())
 ```
 
 ![image](https://user-images.githubusercontent.com/32632731/139713523-d7adcc89-722e-4fdf-91f8-5a030b4ec1bf.png)
+> Screenshot of the Deployed Web Service and its Status
 
 ![image](https://user-images.githubusercontent.com/32632731/139713726-fe6c40eb-9d0e-4e8b-8156-6b29566644ff.png)
+> Screenshot of the Deployed Web Service logs
 
 
 Once service is checked and in a Healthy status we test if by sending a request:
 
-```
+```python
 
 import requests
 import json
