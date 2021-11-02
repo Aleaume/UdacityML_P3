@@ -351,7 +351,8 @@ Before we go ahead and deploy one Model let's review the main perks & fails of t
 The AutoML best model performed overall better looking at the accuracy metric we were mainly looking for.
 We reached a accuracy of ~25% using a VotingEnsemble algorithm. We can see here in Detail the different step that the model goes through:
 
-
+![image](https://user-images.githubusercontent.com/32632731/139952130-df756062-3014-4e68-acc2-e6013c8b6a19.png)
+>Data transformation steps of the Best AutoML run
 
 For the Hyperdrive model, things look a bit more complicated. We did achieve a best accuracy of about ~14% using a LogisticRegression algorithm.
 Here is a little diagram detailing the steps of the model:
