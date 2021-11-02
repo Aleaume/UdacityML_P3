@@ -523,21 +523,26 @@ print(resp.text)
 
 A Screenast can be found here: https://youtu.be/cXrj7JMoKlo
 
-## Standout Suggestions
+## Standout Suggestions To be implemented for improvement
 
--Convert Model to ONNX format and export
+- Convert Model to ONNX format and export.
+So far unsuccessful with a few try-outs. I couldn't find relevant documentation where converting AutoML model to ONNX was clearly detailed. Udacity course does mention coreml, not sure yet how relevant ?
 
--Fine tune json requests when testing deployments (at the moment unsucessful) 
+- Fine tune json requests when testing deployments (at the moment unsucessful). One idea to look at is the auto-generated entry scripts when registering the best run as a model.
 
--Automate upload of entry scripts + train script via az copy or else
+- Automate upload of entry scripts + train script via az copy or else. Due to the development context I used for this project, I couldnt manage this time to have every single steps of the project to be processed from within the notebooks. One of the step where this is visible is when making use of the entry scripts & the train.py script. Here at the moment I do upload those files manually.
 
--Retrieve userfolder in Azure instance directly from the notebook
+- Retrieve userfolder in Azure instance directly from the notebook. Not sure if this possible, user folder name is linked to udacity lab session name. a scrapper of the page or log of authentication at the loading of the workspace followed by a parsing function to get the odl_user_**XXXXX** id.
 
 
 ### On the Model itself:
 
-A lot improvement has to be done on that model to be successful. Accuracy is poor.
-For instead I believe a better & larger volume of data would help. For the purpose of this course I could have definitely taken an "easier" dataset and achieve better results, such as the typical "heart attack" datasets.
+- A lot of improvement has to be done on that model to be successful. Accuracy is poor.
+For instead I believe a better & larger volume of data would help.
+The current dataset is composed of only 646 entires with a low range of both points (very relevant for the accuracy) and small interval of time period (2010-2015).
 
-Also, on the Hyperdrive part I think I could have tested maybe more parameters.
+For the purpose of this course I could have definitely taken an "easier" dataset and achieve better results, such as the typical "heart attack" datasets.
+
+- Also, on the Hyperdrive part I think I could have tested maybe more parameters.
+The current parameters could first be tested with different selection method such as normal / quniform / qloguniform
 
