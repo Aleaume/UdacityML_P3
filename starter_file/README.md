@@ -113,16 +113,21 @@ The AutoML settings go as follow:
 
 ```python
 
+automl_settings = {
+    "n_cross_validations":3,
+    "validation_size":0.20,
+    "label_column_name":'points',
+    "primary_metric":'accuracy',
+    "experiment_timeout_minutes":45  
+}
+
 automl_config = AutoMLConfig(
-    experiment_timeout_minutes=45,
     task='classification',
-    primary_metric='accuracy',
     training_data= dataset,
-    validation_size = 0.20,
-    label_column_name='points',
     compute_target = cluster,
-    n_cross_validations=3
+    **automl_settings
     )
+
 
 ```
 
