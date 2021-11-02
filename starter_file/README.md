@@ -192,6 +192,23 @@ RunDetails(best_run).show()
 ![image](https://user-images.githubusercontent.com/32632731/139949176-62ea4ba4-7189-40cd-ab19-57eb429bc6fb.png)
 >Top 10 Feature importance of the Best AutoML Run
 
+To finish we simply need to register this best run as model:
+
+```python
+
+# Register run as Model
+
+model_name = "AleaumeModelAutoML"
+description = "Best AutoML Model"
+model_path ="outputs/modelAutoML.pkl"
+
+model = runAutoML.register_model(model_name = model_name, description = description)
+
+
+```
+
+![image](https://user-images.githubusercontent.com/32632731/139951651-f223ad40-89cc-43b8-9ae7-b4a7fd0323da.png)
+>Details of the just registered Model with its RunID (Best run)
 
 ## Hyperparameter Tuning
 
@@ -274,13 +291,14 @@ param_sampling = RandomParameterSampling({
 
 We can see in this piece of code that the hyperparamter search is focused on 2 parameters:
 
-- C, for Regularization Strenght. We are looking here at xxxxx
-The selecting method used here is uniform, meaning 
-This was thought to be relevant in oder to ...
+- C, for Inverse of Regularization Strength. We are looking here at intending to reduce overfitting. Regularization is applying a penalty to increase the impact of parameter values. 
+By looking at values from 0.001 (higher penalty) to 0.5 (lower penalty applied) we expect to find what penalty would be best for this experiment.
+The selecting method used here is uniform, meaning we apply a unifrom distribution between the 2 values.
+This was thought to be relevant in oder to balance the weather metrics & the other values such as vintage.
 
 - Max_iter, for the maximum number of iteration. We are looking here at the number of iteration to be used in each run
-The selecting method used here
-This was used in order to test and assess
+The selecting method used here gives the possibility to specify ourselves the exhaustive list of values to be used (5,10, 25, 100 or even 10000)
+This was used in order to test and assess if increasing greatly the number of iterations or simpy using low "simple" values such as 25 or 10 would have any influence in the result of the model.
 
 Finally we create an estimator and define the remaining parameters in the HyperdriveConfig:
 
