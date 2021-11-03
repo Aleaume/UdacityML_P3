@@ -196,6 +196,11 @@ To finish we simply need to register this best run as model:
 
 ```python
 
+We can also have a look at the fitted model:
+
+![image](https://user-images.githubusercontent.com/32632731/140036966-d75ac38f-b729-4295-8d04-caf397df951f.png)
+>Sceenshot of the output of the fitted Model
+
 # Register run as Model
 
 model_name = "AleaumeModelAutoML"
@@ -533,7 +538,28 @@ So far unsuccessful with a few try-outs. I couldn't find relevant documentation 
 - Automate upload of entry scripts + train script via az copy or else. Due to the development context I used for this project, I couldnt manage this time to have every single steps of the project to be processed from within the notebooks. One of the step where this is visible is when making use of the entry scripts & the train.py script. Here at the moment I do upload those files manually.
 
 - Retrieve userfolder in Azure instance directly from the notebook. Not sure if this possible, user folder name is linked to udacity lab session name. a scrapper of the page or log of authentication at the loading of the workspace followed by a parsing function to get the odl_user_**XXXXX** id.
+#### Udpate: solved via extracting the last 6 characters of the workspace name
+```python
 
+lab_id = ws.name[-6:]
+
+```
+![image](https://user-images.githubusercontent.com/32632731/140037386-5cf785cc-4936-4310-af92-9e65f248dc09.png)
+>Output of the retrieved lab id
+
+Can then be used for specifying path in the deployment config:
+
+entry_script_path = "Users/odl_user_"+lab_id+"/score.py"
+
+```python
+my_inference_config = InferenceConfig(
+    environment=env,
+    source_directory= './',
+    entry_script= entry_script_path #"./Users/odl_user_162653/score.py"
+    #entry_script="./score.py"
+)
+
+```
 
 ### On the Model itself:
 
