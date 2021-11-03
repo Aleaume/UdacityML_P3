@@ -192,14 +192,15 @@ RunDetails(best_run).show()
 ![image](https://user-images.githubusercontent.com/32632731/139949176-62ea4ba4-7189-40cd-ab19-57eb429bc6fb.png)
 >Top 10 Feature importance of the Best AutoML Run
 
-To finish we simply need to register this best run as model:
-
-```python
-
 We can also have a look at the fitted model:
 
 ![image](https://user-images.githubusercontent.com/32632731/140036966-d75ac38f-b729-4295-8d04-caf397df951f.png)
 >Sceenshot of the output of the fitted Model
+
+
+To finish we simply need to register this best run as model:
+
+```python
 
 # Register run as Model
 
